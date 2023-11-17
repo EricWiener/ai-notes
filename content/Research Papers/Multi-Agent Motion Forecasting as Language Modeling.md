@@ -6,6 +6,8 @@ summary: "This paper achieves #1 on Waymo Open Motion Dataset (2023) by formulat
 aliases:
   - MotionLM
 ---
+The following are my personal notes on the paper MotionLM.
+
 This paper achieves #1 on Waymo Open Motion Dataset (2023) by formulating multi-agent motion prediction as a language modeling task. They liken road agents to participants in a dialogue who exchange a dynamic series of actions and reactions and represent continuous trajectories as sequences of discrete motion tokens.
 
 The main contributions of the work are:
