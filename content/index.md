@@ -1,6 +1,5 @@
 ---
-title: Welcome to Quartz
+title: Eric's AI Notes
 ---
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+[[Multi-Agent Motion Forecasting as Language Modeling]]
