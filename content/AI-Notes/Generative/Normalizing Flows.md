@@ -55,10 +55,9 @@ This just means that you compose a series of invertible functions in a sequence 
 > [!NOTE] Such a sequence of invertible transformations is also called a (normalizing) flow
 
 **Under the change of variables formula, the probability density function (pdf) of the model given a datapoint can be written as:**
-$$\begin{aligned}
-\log p_{\boldsymbol{\theta}}(\mathbf{x}) & =\log p_{\boldsymbol{\theta}}(\mathbf{z})+\log |\operatorname{det}(d \mathbf{z} / d \mathbf{x})| \\
-& =\log p_{\boldsymbol{\theta}}(\mathbf{z})+\sum_{i=1}^K \log \left|\operatorname{det}\left(d \mathbf{h}_i / d \mathbf{h}_{i-1}\right)\right|
-\end{aligned}$$
+
+$$\begin{aligned} \log p_{\boldsymbol{\theta}}(\mathbf{x}) & =\log p_{\boldsymbol{\theta}}(\mathbf{z})+\log |\operatorname{det}(d \mathbf{z} / d \mathbf{x})| \\ & =\log p_{\boldsymbol{\theta}}(\mathbf{z})+\sum_{i=1}^K \log \left|\operatorname{det}\left(d \mathbf{h}_i / d \mathbf{h}_{i-1}\right)\right|\end{aligned}$$
+
 which means that the log probability of a datapoint $p_{\theta}(x)$ is equivalent to something you can represent in terms of the log probability of the simple distribution of your latent variable $p_{\theta}(\mathbf{z})$.
 
 **You can therefore represent the log-likelihood objective you are minimizing as:**
