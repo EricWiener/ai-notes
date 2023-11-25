@@ -49,6 +49,11 @@ export const FrontMatter: QuartzTransformerPlugin<Partial<Options> | undefined> 
                 .map((tag: string) => tag.trim())
             }
 
+            // Remove 'flashcards' tag
+            if (data.tags) {
+              data.tags = data.tags.filter((tag: string) => tag !== "flashcards")
+            }
+
             // slug them all!!
             data.tags = [...new Set(data.tags?.map((tag: string) => slugTag(tag)))] ?? []
 
