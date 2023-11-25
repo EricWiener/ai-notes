@@ -105,6 +105,13 @@ function canonicalizeCallout(calloutName: string): keyof typeof callouts {
   return calloutMapping[callout] ?? "note"
 }
 
+// Remove private callouts from being published.
+const PRIVARE_CALLOUT = "private"
+
+function isPrivateCallout(calloutName: string): boolean {
+  return calloutName.toLowerCase() === PRIVARE_CALLOUT
+}
+
 // !?               -> optional embedding
 // \[\[             -> open brace
 // ([^\[\]\|\#]+)   -> one or more non-special characters ([,],|, or #) (name)
@@ -318,6 +325,11 @@ export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options> 
               const match = firstLine.match(calloutRegex)
               if (match && match.input) {
                 const [calloutDirective, typeString, collapseChar] = match
+                if (isPrivateCallout(typeString)) {
+                  // Remove private callouts from being published.
+                  node.children = []
+                  return
+                }
                 const calloutType = canonicalizeCallout(
                   typeString.toLowerCase() as keyof typeof calloutMapping,
                 )
