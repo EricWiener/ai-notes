@@ -48,7 +48,6 @@ Using explicit latent variables means you are representing the sample space of a
 They sample a predicted action for each target agent at each future timestep. The target action for the $n$th agent at time $t$ is represented as $a_t^n$ and the set of actions for all agents at time $t$ is represented as $A_{t}\ \doteq \left\{a_{t}^{1},a_{t}^{2},\ldots,a_{t}^{N}\right\}$. 
 ### Factorization
 They [[Factoring a probability distribution|factorize]] the probability of all actions for all agents across all future steps dependent on scene features as the following product of conditionals:
-
 ![[motionlm-eq-1-and-2-broken-down.png|700]]
 
 They treat agent actions as conditionally independent at time $t$ given the previous actions given the previous actions and scene context ($A_t$ depends only on $A_{<t}$ and $S$). Therefore, $p_{\theta}(A_{1},A_{2},\dots A_{T}\mid S)$ (the probability of the agent states at all time steps given the scene features) is equivalent to ${{p}}_{\theta}\bigl(A_{t}\mid A_{<t},S\bigr)$ (the probability of the agent state at time $t$ given the previous agent states and scene features).
@@ -134,9 +133,20 @@ The default behavior of the decoder looks like the following network which is ca
 ### Post-intervention Bayesian network
 They can query for "temporally causal conditional rollouts" by fixing a query agent to take some sequence of actions and only rolling out the other agents (but still only looking at previous agent behavior). This lets you do things like "if hero drives this way, what will the other agents do?"
 ![[post-intervention-causal-bayesian-network.png]]
+As expected, temporally causal conditional rollouts result in more accurate predictions for the target agent by fixing what one agent will do.
+
+An example of the difference in behavior is shown below. When the pedestrian is considered independently (marginal), the model predicts it will cross the road. When the model is conditioned on the vehicle's GT turn (magenta), the pedestrian is instead predicted to yield.
+![[screenshot 2023-11-25_17_01_25@2x.png]]
 ### Acausal conditoning
 You can also allow the actions of one agent to be viewed in the future by other agents (violating causal conditioning). This means that if you condition on agent $x = i$, it will affect all agents $y = j$ for $i \geq j$ for all time steps.
 ![[acausal-conditioning.png]]This means if you had agents $\{1, 2, 3\}$ and conditioned on agent 2, agent 1 would be unaffected ($2\nleq 1$) but agent $3$ would see all of agent 2's behavior.
+
+Acausal conditioning results in even more accurate results than temporally causal conditioning. However, the improvements are largely due to predictions that wouldn't make sense if they were interpreted as predicted reactions to the query agent.
+
+> [!NOTE] You need to be careful when evaluating performance using acausal conditioning
+> If you leak what the autonomous vehicle is going to do to the model, then it will make predictions for other agents that match the AV's behavior.
+> 
+> For instance, if you have an AV trailing another agent but leak that the AV will continue moving forward, then the model will likely predict the lead agent will also move forward even though it is really the lead agent moving forward that would cause the AV to move forward.
 
 # Rollout Aggregation
 Joint motion prediction benchmarks like [[WOMD]] require predicting a small number of future "modes" where each mode corresponds to a specific [[Homotopic Path|homotopic]] outcome (ex. pass/yield).
