@@ -49,9 +49,16 @@ export const FrontMatter: QuartzTransformerPlugin<Partial<Options> | undefined> 
                 .map((tag: string) => tag.trim())
             }
 
-            // Remove 'flashcards' tag
+            // Remove 'flashcards' tag and tags that start with 'eecs'
             if (data.tags) {
-              data.tags = data.tags.filter((tag: string) => tag !== "flashcards")
+              data.tags = data.tags.filter((tag: string) => {
+                if (tag === "flashcards") {
+                  return false
+                } else if (tag.startsWith("eecs")) {
+                  return false
+                }
+                return true
+              })
             }
 
             // slug them all!!
