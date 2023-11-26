@@ -19,6 +19,7 @@ IGNORE_FILE_TYPES = ["*.csv", "*.pdf", "*.skim"]
 RSYNC_FLAGS = [
     "--verbose",
     "--recursive",
+    "--update",
 ]
 
 
