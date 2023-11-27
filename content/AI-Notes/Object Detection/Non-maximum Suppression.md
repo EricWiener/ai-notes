@@ -1,7 +1,9 @@
 ---
-tags: [flashcards]
-source:
-aliases: [NMS]
+tags:
+  - flashcards
+source: 
+aliases:
+  - NMS
 summary: used to decide which bounding boxes to keep as the final output of an object detector by keeping high-confidence non-overlapping boxes.
 ---
 We will get many bounding boxes as the output of our detection. Some of these bounding boxes might be very similar and will have overlap. We need to decide which to keep.

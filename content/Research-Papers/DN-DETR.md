@@ -3,6 +3,7 @@ tags:
   - flashcards
 source: https://arxiv.org/abs/2203.01305
 summary: improves on [[End-to-End Object Detection with Transformers|DETR]] by adding ground truth labels and boxes with noises into the Transformer decoder layers to help stabilize bipartite matching during training.
+draft: true
 ---
 
 [Helpful YouTube Video](https://youtu.be/AqTBqxS0Uww)

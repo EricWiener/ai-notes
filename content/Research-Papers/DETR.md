@@ -1,8 +1,15 @@
 ---
-tags: [flashcards, eecs498-dl4cv]
-source: [[End-to-End Object Detection with Transformers, Nicolas Carion et al., 2020.pdf]]
-aliases: [End-to-End Object Detection with Transformers]
+tags:
+  - flashcards
+  - eecs498-dl4cv
+source:
+  - - End-to-End Object Detection with Transformers
+    - Nicolas Carion et al.
+    - 2020.pdf
+aliases:
+  - End-to-End Object Detection with Transformers
 summary: object detection with vision transformers.
+draft: true
 ---
 
 > [!NOTE] Description from [[DINO]] about DETR

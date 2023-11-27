@@ -33,7 +33,9 @@ The network will now have four different losses:
 - **Object regression**: bounding-box regression loss for object classifier (where proposed bounding box should be shifted to). This is also applicable for positive bounding boxes only. Regresses from the proposal box to the final output box of the model. This compares the final output bounding box to the ground truth bounding box.
 
 # Region Proposal Network
-![[RPN.mp4]]
+
+> [!PRIVATE] RPN Explanation Video
+> ![[RPN.mp4]]
 
 Faster R-CNN uses  a region proposal network instead of using a heuristic to decide what regions to look at. The region proposal network will look at features extracted from the backbone network.
 
@@ -42,7 +44,6 @@ Faster R-CNN uses  a region proposal network instead of using a heuristic to dec
 After passing the input image through the backbone, you end up with a feature map. For instance, in the above example, a 640x480 RGB image was passed through a CNN to generate a 5x6 feature map with 512 channels. Each feature in the feature map corresponds to a point in the original input image (based on the receptive field). Each of these points are called **anchors**.
 
 ### Predict anchors as object/no object
-
 ![[faster-rcnn-classifying-anchors.png]]
 For every point in the feature map, you have a corresponding anchor of fixed size centered at the feature. These bounding boxes of fixed sizes and aspect ratios are called ==anchors==. Each anchor corresponds to a certain region in the original input image. You then want to classify whether each of the ==anchors contains an object or doesn't contain an object==.
 <!--SR:!2024-01-24,515,330!2026-01-26,1024,310-->

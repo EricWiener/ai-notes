@@ -11,8 +11,11 @@ summary: normalization typically used by transformers
 
 Input values in all neurons in the same layer are normalized for each data sample so all neurons in the same layer will have the same mean and the same variance.
 
-Here is a good comparison between Batch Norm and Layer Norm:
-![[Layer Normalization Deep Learning Fundamentals.mp4]]
+Here is a good comparison between Batch Norm and Layer Norm: [YouTube](https://youtu.be/2V3Uduw1zwQ?t=93)
+
+> [!PRIVATE] Video
+> ![[Layer Normalization Deep Learning Fundamentals.mp4]]
+
 ### Reasons to use instead of [[Batch Normalization]]
 **Batch Normalization Cons:**
 Batch Normalization is hard to use with sequence data (ex. RNNs) because if the sequences are of different lengths, batch norm is hard to calculate. 

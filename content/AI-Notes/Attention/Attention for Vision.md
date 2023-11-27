@@ -1,7 +1,9 @@
 ---
-tags: [flashcards]
-source:
+tags:
+  - flashcards
+source: 
 summary: this describes how to add attention blocks to vision models. TLDR is you divide an image into patches, flatten the patches into a sequence, and then compute attention using this sequence. Models like Swin will shift windows around to share patch information.
+draft: true
 ---
 
 ### Idea 1: add attention to existing CNNs

@@ -5,7 +5,8 @@ These approaches use hand-crafted features. For instance, you could look for are
 
 # R-CNN: Region proposals + CNN features
 
-![[r-cnn-overview.mp4]]
+> [!PRIVATE] Video
+> ![[r-cnn-overview.mp4]]
 
 > [!note] Overview
 > The R-CNN object detector processes region proposals with a CNN
