@@ -18,4 +18,5 @@ You can do this with a greedy algorithm:
 3. If any boxes remain, repeat from 1.
 
 ![[example-image-where-nms-would-do-poorly.png|300]]
+
 **Problem:** NMS may eliminate "good" boxes when objects are highly overlapping (like in the above image). There is no good solution to this problem yet.
