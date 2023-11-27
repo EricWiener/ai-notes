@@ -15,7 +15,7 @@ from typing import Any
 
 
 FOLDERS_TO_SYNC = ["AI-Notes", "Research-Papers", "Statistics"]
-IGNORE_FILE_TYPES = ["*.csv", "*.pdf", "*.skim"]
+IGNORE_FILE_TYPES = ["*.csv", "*.pdf", "*.skim", "*.mp4", "*.m4v", "*.mp3", "*.mov"]
 RSYNC_FLAGS = [
     "--verbose",
     "--recursive",
