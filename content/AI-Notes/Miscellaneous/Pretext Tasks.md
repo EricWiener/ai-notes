@@ -1,0 +1,3 @@
+- Pretext task: pre-designed tasks for networks to solve, and visual features are learned by learning objective functions of pretext tasks.
+
+A popular pretext task is minimizing reconstruction error in autoencoders to create lower-dimensional feature representations. Those representations are then used for whatever task you like, with the idea that if the decoder was able to come close to reconstructing the original input, all the essential information exists in the bottleneck layer of the autoencoder, and you can use that lower-dimensional representation as a proxy for the full input

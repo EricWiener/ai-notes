@@ -1,0 +1,4 @@
+**Why do transformers need positional encodings but RNNs don't?**
+??
+RNNs are unable to factor in long-range dependencies due to their recurrent structure, whereas transformers do not have this problem since they can see the entire sequence as it is being processed. However, this also means that transformers require positional encodings to inform the model about where specific tokens are located in the context of a full sequence. Otherwise, transformer would be entirely invariant to sequential information, considering “John likes cats” and “Cats like John” as identical. Hence, positional encodings are used to signal the absolute position of each token.
+[Source](https://jaketae.github.io/study/relative-positional-encoding/)

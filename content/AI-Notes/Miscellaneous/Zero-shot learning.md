@@ -1,0 +1,5 @@
+#flashcards 
+**[[Zero-shot learning]]** (ZSL) is a problem setup in [machine learning](https://en.wikipedia.org/wiki/Machine_learning "Machine learning"), where at test time, a learner observes samples from classes that were ==not observed during [training](https://en.wikipedia.org/wiki/Machine_learning#Training_models "Machine learning"), and needs to predict the class they belong to==. 
+<!--SR:!2029-12-17,2220,350-->
+
+Zero-shot methods generally work by associating observed and non-observed classes through some form of auxiliary information, which encodes observable distinguishing properties of objects. For example, given a set of images of animals to be classified, along with auxiliary textual descriptions of what animals look like, an AI which has been trained to recognize horses, but has never seen a zebra, can still recognize a zebra if it also knows that zebras look like striped horses.

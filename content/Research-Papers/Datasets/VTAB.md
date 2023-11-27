@@ -1,0 +1,2 @@
+- This is a low data benchmark. It only has around 1,000 images per task.
+- It splits images into three categories: natural (dogs, trees, etc.), specialized images (medical and satellite), and geometric structures.

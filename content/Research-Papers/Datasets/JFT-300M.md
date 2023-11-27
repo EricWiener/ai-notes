@@ -1,0 +1,3 @@
+**JFT-300M** is an internal Google dataset used for training image classification models. Images are labeled using an algorithm that uses complex mixture of raw web signals, connections between web-pages and user feedback. This results in over one billion labels for the 300M images (a single image can have multiple labels). Of the billion image labels, approximately 375M are selected via an algorithm that aims to maximize label precision of selected images.
+
+Google dataset of ~300M images annotated with labels from ~18k categories.

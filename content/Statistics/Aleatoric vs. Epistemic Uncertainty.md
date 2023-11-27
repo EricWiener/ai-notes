@@ -9,13 +9,15 @@ aliases:
 ---
 ### Aleatoric uncertainty
 **Aleatoric uncertainty**: This is a ==natural variation== in the data. For example an agent can either take a left or right turn or change lanes, etc given the same context information.
+<!--SR:!2023-11-27,1,228-->
 
 This level of ambiguity cannot be resolved by increasing the model capacity, but rather the model needs to predict calibrated probabilities for these outcomes. Despite the theoretical possibility of modeling these variations using a small number of output trajectories directly, there are several challenges in learning. Some examples include mode collapse and failure to model these variations due to limited model capacity.
 
 See [[Homoscedastic loss]] for more info.
 
 ### Epistemic uncertainty
-**Epistemic uncertainty**: This is the variation across ==model outputs==, which typically indicates the model’s failure to capture certain aspects of the scene or input features. 
+**Epistemic uncertainty**: This is the variation across ==model outputs==, which typically indicates the model’s failure to capture certain aspects of the scene or input features. For instance, a model could be a ResNet and the different model outputs are the results given by different checkpoints.
+<!--SR:!2023-11-27,1,230-->
 
 Such variations could occur if some models are poorly trained or haven’t seen a particular slice of the data. By doing model ensembling, we attempt to reduce this uncertainty.
 
