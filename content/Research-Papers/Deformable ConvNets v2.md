@@ -1,7 +1,7 @@
 ---
 tags: [flashcards]
 source: https://arxiv.org/abs/1811.11168
-aliases: [Deformable ConvNets v2: More Deformable, Better Results]
+aliases: [Deformable ConvNets v2 - More Deformable, Better Results]
 summary: introduces [[Modulated Deformable Convolution|Deformable Convolution v2]]
 ---
 
