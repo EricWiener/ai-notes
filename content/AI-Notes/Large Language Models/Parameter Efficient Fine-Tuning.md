@@ -46,7 +46,7 @@ The following is an example of hard prompt tuning to achieve a better translatio
 ```
 
 Hard prompt tuning is where you directly change the ==discrete input tokens== which are not differentiable.
-<!--SR:!2023-11-30,11,270-->
+<!--SR:!2024-01-10,41,290-->
 
 ### Soft Prompt Tuning
 Soft prompt tuning concatenates the embeddings of the input tokens with a trainable tensor that can be optimized via backprop to improve the modeling performance on a target task. You can train a small model for a specific task that learns to generate an output that performs the model's overall performance.

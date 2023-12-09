@@ -11,7 +11,7 @@ What are the three main improvements of Swin v2 over Swin?
 - Training instability is addressed with a residual-post-norm method combined with cosine attention to improve training stability.
 - Resolution gaps between pre-training and fine-tuning (using models pre-trained on low-res images with high-res inputs) is addressed with a log-spaced continuous position bias method.
 - Needing a large quantity of labelled data is addressed with a self-supervised method, SimMIM.
-<!--SR:!2023-11-30,4,290-->
+<!--SR:!2023-12-14,14,310-->
 
 The paper trained a 3 billion-parameter Swin Transformer V2 model (largest dense vision model to date) and it can train with images up to 1,536x1,536 resolution.
 

@@ -223,6 +223,9 @@ These matrices will transform the input into two new sets of vectors: one of key
 <!--SR:!2025-06-30,932,332!2024-11-06,479,315!2024-08-11,314,365!2024-08-10,313,365-->
 
 ## Self-Attention Layer
+> [!NOTE] Self-Attention summary from [[Research-Papers/Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer|T5]]
+> Self-attention is a variant of attention that processes a sequence by replacing each element by a weighted average of the rest of the sequence. 
+
 This is a special case of the attention layer where you ==only have inputs and no queries==. 
 <!--SR:!2027-09-01,1544,330-->
 

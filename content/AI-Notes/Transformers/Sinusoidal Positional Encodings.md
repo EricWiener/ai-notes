@@ -74,7 +74,7 @@ where $$M_{\phi, k}=\left[\begin{array}{cc}
 
 > [!NOTE] For a fixed dimension $k$, there is a linear relationship between a token $t$ and a token $\phi$ timesteps later ($t + \phi$).
 > The linear function doesn't depend on the token index $t$ and just depends on the dimension in the token and the distance between the two tokens. This is important for learning relationships between ==relative positions==.
-<!--SR:!2023-12-06,221,290-->
+<!--SR:!2026-05-20,895,310-->
 
 ### Why are both sine and cosine used?
 > Personally, I think, only by using both sine and cosine, we can express the sine(x+k) and cosine(x+k) as a linear transformation of sin(x) and cos(x). It seems that you can’t do the same thing with the single sine or cosine. If you can find a linear transformation for a single sine/cosine, please let me know in the comments section.

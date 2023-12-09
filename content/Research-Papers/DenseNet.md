@@ -53,7 +53,7 @@ DenseNet's Composite Layer is denoted as $\mathbf{x}_{\ell}=H_{\ell}\left(\left[
 
 **Composite Layer with Bottleneck Layer**
 Each layer only has $k$ (growth rate) additional outputs, but it often has many more inputs. To increase computational efficiency, you can add a ==1×1 convolution== before each 3×3 convolution to reduce the number of input feature-maps to the 3x3 conv.
-<!--SR:!2023-11-29,310,268-->
+<!--SR:!2027-02-06,1164,288-->
 
 The BN-ReLU-Conv(1× 1)-BN-ReLU-Conv(3×3) version of $H_{\ell}$ is called DenseNet-B. The paper lets each 1x1 convolution produce a $4k$ feature map. This is then passed to the 3x3 conv which produces a $k$ feature map (which is then concatenated to the previous feature maps and passed onto the next layer). This makes it so the 3x3 conv only has to operate on a  feature map with $4k$ channels vs. the larger number of channels that the $1 \times 1$ conv operates on.
 

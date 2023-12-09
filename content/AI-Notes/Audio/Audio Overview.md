@@ -32,5 +32,5 @@ Humans do not perceive changes in frequency linearly (going from 100->200 Hz con
 
 The unit **Mel** is used where equal distances in pitch sound equally distant to the listener. You can map your frequency values to the Mel scale and then plot these values. This is called a ==Mel Spectogram==.
 ![[screenshot 2023-11-18_09_38_40@2x.png|400]]
-<!--SR:!2023-11-30,4,270-->
+<!--SR:!2023-12-15,15,290-->
 

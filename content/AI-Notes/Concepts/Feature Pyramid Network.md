@@ -10,7 +10,7 @@ publish: true
 ![[encoder-decoder-architecture.png|350]] 
 
 We can use a feature pyramid network to resize our feature map to different sizes. We don't want to down-size the image and then run it through the CNN because then we will have ==less features==. Additionally, we can't just use the outputs of different layers of the CNN to get different size features because the ==earlier layers== won't do as good a job of capturing information. 
-<!--SR:!2023-12-07,479,330!2023-12-08,480,330-->
+<!--SR:!2029-11-24,2179,350!2023-12-08,480,330-->
 
 The solution is to add connections that feed information from high level features (from the backbone) to lower level features. Now, **all the levels benefit from the backbone**, but you still operate at different resolutions. The FPN gives us a ==set of feature maps== of varying spatial resolutions coming out of the backbone network (vs a single feature map).
 <!--SR:!2027-07-13,1494,343-->

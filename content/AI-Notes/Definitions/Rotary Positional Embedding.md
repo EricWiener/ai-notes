@@ -17,7 +17,7 @@ RoPE embeddings will rotate vectors at varying amounts depending on their positi
 **What do RoPE Embeddings do?**
 ??
 RoPE embeddings will rotate keys and query vectors depending on their position in the sequence and the channel dimension. This improves model generalization for sequences longer than it is trained on.
-<!--SR:!2023-11-27,1,230-->
+<!--SR:!2023-12-11,11,250-->
 
 ### Motivation
 When calculating the attention matrix, you want it to have two characteristics:

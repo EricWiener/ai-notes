@@ -29,7 +29,7 @@ In addition to combining changes from previous papers, DINO also propose three n
 - Contrastive denoising training. It adds a negative noised BBOX that the model should learn to avoid predicting.
 - Mixed query selection method (learnable content query + positional queries dependent on encoder features). Mask DINO will later switch back to having both content and positional dependent on features.
 - Look forward twice scheme to change how parameters are updated.
-<!--SR:!2023-11-27,30,130-->
+<!--SR:!2024-02-02,64,150-->
 
 # Related Work
 ### Classical Object Detectors
