@@ -104,9 +104,6 @@
 - `col` is a *vector* of color names enclosed in the `c()` function; e.g., `col = c("red", "blue", "green")`
 - `pch` is a *vector* of **p**lotting **ch**aracters, indicated by numbers 0-25.
     
-    [[]]
-    
-
 ### `legend(position, legend, col, pch, ...)`
 
 - `position` is a position for the legend, in quotes. One of `"bottomright"`, `"bottom"`, `"bottomleft"`, `"left"`, `"topleft"`, `"top"`, `"topright"`, `"right"` or `"center"`.

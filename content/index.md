@@ -1,5 +1,6 @@
 ---
 title: Eric's AI Notes
+publish: true
 ---
 
 [[Research-Papers/Multi-Agent Motion Forecasting as Language Modeling|Multi-Agent Motion Forecasting as Language Modeling]]

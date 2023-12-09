@@ -12,11 +12,15 @@ Cameras capture data in perspective view and lidar in 3D view. Existing approach
 You need to use a fusion approach vs. just encoding each sensor individually and performing a naive elementwise feature fusion won't work since the same element in different feature tensors might correspond to different spatial locations. Therefore, you need a shared representation such that all sensor features can easily be converted to it without information loss and it is suitable for different types of tasks.
 
 **Projecting lidar points onto a 2D image**:
-![[Research-Papers/bevfusion-srcs/screenshot 2023-12-07_13_01_34@2x.png]]
+
+![[Research-Papers/bevfusion-srcs/bevfusion-lidar-projected-onto-image.png]]
+
 Projecting lidar points onto a 2D image results in losing geometric information (points that are far away from each other can appear closer when projecting into 2D).
 
 **Projecting image features onto a point cloud**
-![[Research-Papers/bevfusion-srcs/screenshot 2023-12-07_13_03_19@2x.png]]
+
+![[Research-Papers/bevfusion-srcs/bevfusion-image-projected-onto-lidar.png]]
+
 The camera-to-lidar projection is semantically lossy since for a typical 32-beam lidar only 5% of camera features will be matched to a lidar point and all other pixel features will be dropped.
 
 # Related Work
@@ -37,7 +41,9 @@ They then apply the convolution-based BEV encoder to the unified BEV features to
 The camera to BEV transformation consists of first projecting the camera to a 3D point cloud and then converting the 3D point cloud to a 2D BEV feature.
 
 **Camera to 3D point cloud**
-![[Research-Papers/bevfusion-srcs/screenshot 2023-12-07_13_18_21@2x.png|200]]
+
+![[Research-Papers/bevfusion-srcs/bevfusion-camera-to-3d-point-cloud.png|200]]
+
 The camera-to-BEV transformation is difficult because the depth associated with each camera feature is ambiguous. The paper predicts a discrete depth distribution for each pixel. You then scatter each feature pixel into $D$ discrete points along the camera ray and rescales the associated features by their corresponding depth probabilities. This gives you a camera feature point cloud of size $NHWD$ where $N$ is the number of cameras and $(H, W)$ is the camera feature map size.
 
 > [!NOTE] Camera-to-BEV TLDR

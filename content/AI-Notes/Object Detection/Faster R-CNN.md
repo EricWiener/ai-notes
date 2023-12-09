@@ -1,7 +1,10 @@
 ---
-tags: [flashcards, eecs498-dl4cv]
+tags:
+  - flashcards
+  - eecs498-dl4cv
 source: 
 summary: Faster R-CNN uses a region proposal network to predict proposals from features. Otherwise it is the same as Fast R-CNN.
+publish: true
 ---
 
 In Fast R-CNN, the computational cost is dominated by region proposal (which runs on CPU). **Faster R-CNN** uses a ==region proposal network== to predict proposals from features instead of using ==selective search== (and achieves better results). Otherwise, it is the same as [[Fast R-CNN]]. It is very fast and can run in real-time.

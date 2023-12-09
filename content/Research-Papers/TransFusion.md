@@ -1,11 +1,11 @@
 ---
-tags: [flashcards]
-source: [[TransFusion_ Robust LiDAR-Camera Fusion for 3D Object Detection with Transformers, Xuyang Bai et al., 2022.pdf]]
+tags:
+  - flashcards
 summary: lidar-camera fusion technique using transformers
+publish: true
 ---
 
 [Code](https://github.com/XuyangBai/TransFusion/blob/master/mmdet3d/models/dense_heads/transfusion_head.py)
-
 ### Introduction
 - TransFusion is a lidar-camera fusion with a ==soft-association== mechanism to handle inferior image conditions.
 - Introduce adjustments for object queries to boost the quality of initial bounding box predictions for object fusion. Use an image guided system to help detect objects that are difficult to see in point clouds.
@@ -110,8 +110,11 @@ The query initialization was done with either just a heatmap generated from lida
 - Using the category of each selected candidate (ex. $\hat{S}_{i j k}$ belonging to the $k$-th category), they element-wisely sum the query feature with a category embedding produced by linearly projecting the one-hot category vector into a $\mathbb{R}^d$ vector. This means they take a one-hot embedding for the category the candidate is predicted to belong to (using the candidate heatmap) and then use a learned network to project that to $\mathbb{R}^d$ so it can be combined with the features from the $d$ dimensional lidar BEV feature map.
 
 **Benefits:**
-- Provide useful information when modelling the object-object relations in the self-attention modules and the object-context modules.
+- Provide useful information when modeling the object-object relations in the self-attention modules and the object-context modules.
 - During prediction it can deliver useful prior knowledge of the object and allow the network to focus on intra-category variance.
+
+> [!NOTE] What's the difference between object-object relations and object-context?
+> Object-object is when both the keys/values + queries come from the same set of object tokens. Object-context is when one comes from object tokens and one comes from scene tokens.
 
 ## Image guided query initialization:
 - To leverage the ability of high-resolution images in detecting small objects and make the algorithm more robust against sparse point clouds, they use an image-guided query initialization technique.
@@ -148,7 +151,3 @@ $$\mathcal{L}_{\operatorname{match}}\left(y_i, \hat{y}_{\sigma(i)}\right)= -\mat
 Once the pairs are matched with the Hungarian Algorithm, a [[Focal Loss]] is computed for the classification branch. The bounding box regression is supervised by an [[Regularization|L1 Loss]] for only positive pairs. A penalty reduced focal loss is used for the heatmap prediction (see [[CenterPoint]]).
 
 The total loss is the weighted sum of losses for each component.
-
-# Questions
-**I don't understand difference between object-object relations and object-context.**
-Object-object is when both the keys/values + queries come from the same set of object tokens. Object-context is when one comes from object tokens and one comes from scene tokens.
