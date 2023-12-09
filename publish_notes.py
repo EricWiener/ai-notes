@@ -9,10 +9,8 @@ python publish_notes.py \
 """
 import argparse
 import subprocess
-import argparse
 import sys
 from typing import Any
-
 
 FOLDERS_TO_SYNC = ["AI-Notes", "Research-Papers", "Statistics"]
 IGNORE_FILE_TYPES = ["*.csv", "*.pdf", "*.skim", "*.mp4", "*.m4v", "*.mp3", "*.mov"]
@@ -37,6 +35,13 @@ def sync(input_dir: str, output_dir: str, dry_run: bool) -> None:
     """
     flags = " ".join(RSYNC_FLAGS)
 
+    # rsync over index.md
+    command = f"rsync {flags} {input_dir}/index.md {output_dir}"
+    if dry_run:
+        command += " --dry-run"
+    subprocess.run(command, shell=True)
+
+    # rsync over folders
     ignore_files = ""
     for file_type in IGNORE_FILE_TYPES:
         ignore_files += f"--exclude={file_type} "
