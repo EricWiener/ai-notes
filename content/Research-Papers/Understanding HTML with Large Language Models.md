@@ -25,6 +25,7 @@ They want to create an agent that can search for specific content or controls on
 It is common in NLP to take a LLM pretrained on a large text corpus and then fine tune or prompt the LLM on a task-specific dataset. They want to apply the same strategy to understanding HTML.
 ### Operating on HTML
 ![[Research-Papers/understanding-html-with-large-language-models-srcs/understanding-html-with-large-language-models-20231201100155001.png|400]]
+
 In the example above, there are two `<input>` tags (one for email and one for password) and their corresponding labels are in a separate branch of the page.
 
 Each element has a set of attributes that can be thought of as key-value pairs. These attributes decide what will be shown when the element is rendered. In the example above, the HTML element:
