@@ -38,13 +38,10 @@ has the attributes:
 
 # Tasks
 They have three tasks that they use to benchmark the models understanding of HTML.
-
 ### **Semantic Classification**
 Classify a given HTML element as a specific category (ex. address, email, or password).
-
 ### **Description Generation**:
 The model is given an HTML snippet and prompted to produce a natural language description (ex. when given an email field the description generated could be "Please enter your email address").
-
 ### Autonomous Web Navigation
 A model is given an HTML page and a natural language command and must apply appropriate actions on a sequence of HTML pages to satisfy the command.
 
