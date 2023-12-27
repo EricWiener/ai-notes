@@ -18,7 +18,9 @@ where $s \geq 1$ is the guidance scale.
 
 ### Geometric Interpretation
 A geometric interpretation for a single point of what $\hat{\epsilon}_\theta\left(x_t \mid y\right)=\epsilon_\theta\left(x_t \mid \emptyset\right)+s \cdot\left(\epsilon_\theta\left(x_t \mid y\right)-\epsilon_\theta\left(x_t \mid \emptyset\right)\right)$ is accomplishing is below:
-![[classifier-free-guidance-diagram.excalidraw|700]]
+
+![[Research-Papers/classifier-free-diffusion-guidance-srcs/classifier-free-guidance-diagram.excalidraw.png]]
+
 - $\epsilon_\theta\left(x_t \mid \emptyset\right)$ is the output of the model conditioned on the null label
 - $\epsilon_\theta\left(x_t \mid y\right)$ is the output of the model conditioned on the class label
 - $\epsilon_\theta\left(x_t \mid y\right)-\epsilon_\theta\left(x_t \mid \emptyset\right)$ is the difference between the conditioned and unconditioned points.

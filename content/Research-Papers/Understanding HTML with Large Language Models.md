@@ -2,7 +2,7 @@
 tags:
   - flashcards
 source: https://arxiv.org/abs/2210.03945
-summary: Free dataset of web crawl data
+summary: Trained an LLM to understand raw HTML and take actions on a web page.
 publish: true
 ---
 # Abstract
@@ -17,13 +17,13 @@ They found LLMs pretrained on a standard dataset (not HTML focused) transfer ver
 
 They found the T5-based models perform best because of their bidirectional encoder-decoder architecture.
 
-They created and open-sourced a large scale HTML dataset distilled and auto-labeled from [[Research-Papers/Datasets/CommonCrawl|CommonCrawl]].
+They created and open-sourced a large scale HTML dataset distilled and auto-labeled from [[Research-Papers/Datasets/CommonCrawl|CommonCrawl]]. This dataset is used for description generation training.
 
 # Introduction
 They want to create an agent that can search for specific content or controls on a web page and navigate the site autonomously. 
 
 It is common in NLP to take a LLM pretrained on a large text corpus and then fine tune or prompt the LLM on a task-specific dataset. They want to apply the same strategy to understanding HTML.
-### Operating on HTML
+# Operating on HTML
 ![[Research-Papers/understanding-html-with-large-language-models-srcs/understanding-html-with-large-language-models-20231201100155001.png|400]]
 
 In the example above, there are two `<input>` tags (one for email and one for password) and their corresponding labels are in a separate branch of the page.
@@ -36,6 +36,11 @@ has the attributes:
 - `tag: "input"`
 - `type: "email"`
 - `id: "uName"`
+
+### Pre-processing pipeline
+![[Research-Papers/understanding-html-with-large-language-models-srcs/understanding-html-with-large-language-models-20231214102016524.png]]
+Given a web page they detect 
+
 
 # Tasks
 They have three tasks that they use to benchmark the models understanding of HTML.
@@ -55,6 +60,24 @@ This paper is different in that it takes raw HTML input and then is able to take
 
 # Dataset
 They use the [[Research-Papers/Datasets/MiniWOB|MiniWOB]] dataset to assess how the model performs on web navigation. However, they also wanted to be able to assess the models on real-world websites so they created their own dataset for the description generation task based on CommonCrawl.
+
+# Ablation Studies
+### Removing closing HTML tags
+They evaluated the models performance when they removed closing HTML tags but kept the order of elements the same.
+
+Ex: converting
+```
+<div id="form"><div><input id="username"></div></div>
+```
+into
+```
+<div id="form"><div><input id="username">
+```
+
+The model saw a 6% decrease in success rate on MiniWoB which suggests that the model is partially dependent on the DOM topology.
+
+> [!NOTE] Performance drop might be explained by other reasons.
+> They evaluated an already trained WebN-T5-3B model on the same synthetic websites with the structure corrupted and the performance dropped. The performance might not have dropped so much if they had trained the model on this format of data originally vs. using a model that was trained with the non-corrupted data. The T5 model is a bidirectional encoder so it makes sense that information to the left and right of the relevant element is used in the encoding process. 
 
 # Conclusion
 - Pre-training is critical for model performance and can reduce labeled data requirements (improving sample efficiency by up to 200x). They also found that pre-training on HTML/code was not needed in order to perform well on understanding HTML.

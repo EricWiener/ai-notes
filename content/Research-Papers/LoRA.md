@@ -2,22 +2,18 @@
 tags:
   - flashcards
 source: https://arxiv.org/abs/2106.09685
-summary: 
+summary: LoRA is a method to finetune LLMs by learning a set of weight updates to apply to the original model. It is able to train fewer parameters by only training a low rank decomposition of the update matrices.
 aliases:
   - Low-Rank Adaptation
   - Low-Rank Adaptation of Large Language Models
+publish: true
 ---
-https://jaketae.github.io/study/lora/
-[GitHub Post on Choosing the Rank](https://github.com/cloneofsimo/lora/discussions/37)
-[Coffee Chat YouTube Video](https://youtu.be/KEv-F5UkhxU)
-
 We often want to finetune base LLMs to use them on downstream tasks. However, it is difficult to finetune them since they contain billions of parameters and we also need to have a huge amount of memory to store both the model weights and the gradients for each weight. Using LoRA allows us to finetune with a lot fewer parameters.
 
 LoRA freezes the original model weights during finetuning and instead adds a separate set of weights to train. After finetuning, these set of weights represent the differences we need to add to the pretrained parameters to make the model better for the finetuning task. At inference, you just load up the original weights + the updates and you still have the same number of parameters at inference.
 
 LoRA is able to train fewer weights than the original weights of the model by ==decomposing the weight matrices into their low-rank decompositions== which use fewer parameters while still approximating the full matrices.
 <!--SR:!2024-02-08,81,290-->
-
 ### Rank of a matrix
 The rank of a matrix is the number of ==linearly independent== columns in the matrix.
 ![[lora-20231028094625618.png]]
@@ -26,7 +22,8 @@ A column is linearly independent if you can't create it from a combination of th
 
 ### Low rank decomposition
 LoRA's idea is that you don't need to optimize the full rank of the matrices. Instead, you can do a low-rank decomposition as representing the weights as a composition of two matrices ($Y$ and $Z$ in the diagram below):
-![[screenshot 2023-10-28_09_50_18@2x.png]]
+![[Research-Papers/lora-srcs/screenshot-2023-10-28_09_50_18@2x.png]]
+
 [Stanford Lecture Notes](https://web.stanford.edu/class/cs168/l/l9.pdf)
 
 You can represent a matrix of size $m \times n$ with rank $k$ by two matrices of size $m \times k$ and $k \times n$. Instead of needing $m \cdot n$ parameters, you just need $k(m + n)$ parameters which is much smaller if the rank of the matrix is lower than the number of columns in it. For example, a $10 \times 12$ matrix with rank 4 will have $10 \cdot 12 = 120$ parameters but only $4(10 + 12) = 88$ parameters. Note: if the rank is not much lower than the number of columns, you don't see a saving of parameters:
@@ -66,8 +63,13 @@ Adapters add small learnable layers throughout the network that update the behav
 Instead of manually choosing the right words to prompt the model, you use input vectors that are concatenated to the prompt and then tune these vectors using backprop until the model delivers the correct answer.
 
 Instead of using words to prompt the model:
-![[screenshot 2023-10-28_10_09_51@2x.png]]
+![[Research-Papers/lora-srcs/screenshot-2023-10-28_10_09_51@2x.png]]
 you use input vectors that don't stand for any words in particular:
-![[screenshot 2023-10-28_10_10_06@2x.png]]
+![[Research-Papers/lora-srcs/screenshot-2023-10-28_10_10_06@2x.png]]
 
 The issue with prefix tuning is it occupies part of the sequence length and reduces the size of the effective input. It is also difficult to optimize and the number of trainable parameters is hard to choose.
+
+### Useful Resources
+- https://jaketae.github.io/study/lora/
+- [GitHub Post on Choosing the Rank](https://github.com/cloneofsimo/lora/discussions/37)
+- [Coffee Chat YouTube Video](https://youtu.be/KEv-F5UkhxU)

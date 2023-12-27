@@ -5,6 +5,7 @@ source: https://arxiv.org/abs/1910.10683
 summary: Google did a survey of various techniques to improve transformer performance and then used the results of the survey to create a SOTA model that generalizes to many types of tasks.
 aliases:
   - T5
+publish: true
 ---
 ![[Research-Papers/exploring-the-limits-of-transfer-learning-with-a-unified-text-to-text-transformer-srcs/screenshot 2023-12-04_11_36_05@2x.png]]
 The paper aims to explore the existing set of transfer learning techniques for NLP by treating all tasks (ex. translation, question answering, classification, etc.) as feeding the model text as input and training it to generate some target text. This allows using the same model, loss function, hyperparameters, etc. across a diverse set of tasks so they can compare the effectiveness of different factors. "T5" refers to the model which they call "**T**ext-**t**o-**T**ext **T**ransfer **T**ransformer" (5 T's there).
@@ -14,7 +15,7 @@ The paper aims to explore the existing set of transfer learning techniques for N
 - Unsupervised pre-training for NLP is attractive because unlabeled text data is available in large quantities on the internet.
 - The paper doesn't aim to propose new methods and instead aims to conduct a comprehensive survey on where the field stands.
 - Based on the results of their survey, they are able to create a model that achieves SOTA on many tasks.
-- They release the "Colossal Clean Crawled Corpus" (100s of GB of clean English text scraped from the web), code, and pre-trained models.
+- They release the "Colossal Clean Crawled Corpus" (100s of GB of clean English text scraped from the web), code, and pre-trained models. Also referred to as C4. [HuggingFace Link](https://huggingface.co/datasets/c4)
 
 # Setup
 - Early NLP transformer learning used RNNs but now it is popular to use [[AI-Notes/Transformers/Transformer|Transformer]]s.
@@ -59,7 +60,7 @@ For instance, [[Research-Papers/BERT|BERT]] is an encoder-only model and either 
 
 Therefore, they consider a model that behaves similar to [[Research-Papers/BERT|BERT]] but not exactly the same (it is trained with a similar [[Research-Papers/BERT#Masked LM (Masked Language Modeling)]] objective.
 
-> [!NOTE] Not including a large chunk of the paper to get to the final results
+> [!NOTE] There is a large portion of the paper that I did not include notes on.
 
 ### Architecture
 An encoder-decoder architecture with a denoising objective (you mask certain tokens and then train the model to predict what the masked tokens are) performs best. They shared parameters across the encoder and decoder. Reducing the number of layers in the encoder-decoder hurt performance.

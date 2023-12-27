@@ -1,10 +1,14 @@
 ---
-tags: [flashcards]
-source:
-aliases: [unpooling, bilinear interpolation, bicubic interpolation]
+tags:
+  - flashcards
+source: 
+aliases:
+  - unpooling
+  - bilinear interpolation
+  - bicubic interpolation
 summary: upsampling is used to increase spatial dimensions. There are multiple approaches for how to do this.
+publish: true
 ---
-
 ### Bed of Nails Upsampling
 ![[upsampling-bed-of-nails.png|300]]
 Bed of nails upsampling just places each input value in the top-left position of the larger region and puts zeros everywhere else. 

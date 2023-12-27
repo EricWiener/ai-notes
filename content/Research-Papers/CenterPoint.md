@@ -19,6 +19,7 @@ The center-head’s goal is to produce a heatmap peak at the center location of 
 
 **Increasing positive supervision**
 ![[centerpoint-20230713180354279.png]]
+
 In the above example you can see how objects in a top down map view are sparser than in an image. In map-view, distances are absolute, while an image-view distorts them by perspective. Consider a road scene, in map-view the area occupied by vehicles small, but in image-view, a few large objects may occupy most of the screen.
 
 Using the standard supervision of CenterNet results in a very sparse supervisory signal where most of the locations are considered background. To counteract this, they increase the positive supervision for the target heatmap $Y$ by enlarging the Gaussian peak rendered at each ground truth object center. This allows the model to get more signal from pixels close to the object center.
@@ -36,7 +37,9 @@ This helps localize the object in 3D and adds missing elevation information remo
 The second stage of CenterPoint predicts a class-agnostic box confidence score and a box refinement.
 
 The second stage of CenterPoint extracts additional point-features from the 2D flattened output of the backbone. They extract point features from each face of the predicted bounding box. However, in the top-down view the center of the top face, center of the bottom face, and center of the BBOX all project to the same 2D point (shown as the blue circles in the box on the left). Therefore, they only use the centers of the four outward-facing box-faces + the predicted object center point (marked as 'x's on the right).
-![[centerpoint-3d-box-points.excalidraw|350]]
+
+![[Research-Papers/centerpoint-srcs/centerpoint-3d-box-points.excalidraw.png|350]]
+
 For each point they extract a feature using [[Upsampling|bilinear interpolation]] from the backbone map-view output $M$. They then concatenate the extracted point-features and pass them through an [[Linear|MLP]]. The second stage then predicts a class-agnostic confidence score and box refinement.
 
 ### Box Refinement (aka IoU Rectification)
