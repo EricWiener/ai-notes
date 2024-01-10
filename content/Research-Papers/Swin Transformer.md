@@ -1,12 +1,15 @@
 ---
-tags: [flashcards, eecs498-dl4cv]
-source: [[Swin Transformer_ Hierarchical Vision Transformer using Shifted Windows, Ze Liu et al., 2021.pdf]]
-aliases: [swin, Swin]
+tags:
+  - flashcards
+  - eecs498-dl4cv
+aliases:
+  - swin
+  - Swin
 summary: a hierarchial vision transformer
+publish: true
 ---
-
 ### Overview
-The Swin Transformers is a hierarchical transformer whose representation is computed with shifted windows. Shifted windows increase efficiency by limiting [[Attention#Self-Attention Layer|self-attention]] to non-overlapping local windows while also allowing for cross-window connections (by shifting the windows for even and odd layers). The model has ==linear== computational complexity with respect to image size (linear with respect to increases in height or width, but not increases in both at the same time) because the self-attention is only within a window. If you divide the image into a grid of 4x4 patches and then increase the width by $w$ you will have $4 \times (4 + w) = 16 + 4w$ patches to compute and $O(4w) = O(w)$ which is linear with respect to the width. 
+The Swin Transformer is a hierarchical transformer whose representation is computed with shifted windows. Shifted windows increase efficiency by limiting [[Attention#Self-Attention Layer|self-attention]] to non-overlapping local windows while also allowing for cross-window connections (by shifting the windows for even and odd layers). The model has ==linear== computational complexity with respect to image size (linear with respect to increases in height or width, but not increases in both at the same time) because the self-attention is only within a window. If you divide the image into a grid of 4x4 patches and then increase the width by $w$ you will have $4 \times (4 + w) = 16 + 4w$ patches to compute and $O(4w) = O(w)$ which is linear with respect to the width. 
 <!--SR:!2024-11-01,445,314-->
 
 Swin Transformers produce ==feature maps of varying spatial resolutions==, so they can be used as a general-purpose backbone for both image classification and dense recognition tasks by using techniques like [[Object Detection#Feature Pyramid Network|feature pyramid networks]] or [[Encoder-Decoder Models|U-Net]] architectures. Swin produces the same resolutions as common CNN architectures ([[CNN Architectures#VGG Deeper Networks Regular Design 2014]], [[ResNet]]) so it can easily replace existing backbones.
@@ -32,7 +35,10 @@ Traditional vision transformers produce feature maps of a single low resolution 
 ![[screenshot-2022-08-08_09-36-45.png]]
 
 ### First layer of the Swin Transformer
-![[swin-transformer-layer-1.mp4]]
+
+> [!PRIVATE]
+> ![[swin-transformer-layer-1.mp4]]
+
 ![[swin-transformer-start.png|400]]
 Like a [[ViT An Image is Worth 16x16 Words Transformers for Image Recognition at Scale|ViT]], the Swin Transformer will start by:
 - Take input image of dimension $3 \times H \times W$
@@ -42,7 +48,9 @@ Like a [[ViT An Image is Worth 16x16 Words Transformers for Image Recognition at
 
 
 ### Second layer of the Swin Transformer
-![[swin-transformer-patch-merging.mp4]] 
+
+> [!PRIVATE]
+> ![[swin-transformer-patch-merging.mp4]] 
 
 The second stage of the Swin Transformer is similar to the first, but introduces a patch merging layer that decreases the spatial resolution by 1/2 in both length and width and double the number of channels.
 
@@ -55,7 +63,9 @@ The second stage of the Swin Transformer is similar to the first, but introduces
 This layer looks similar to the pooling + projection layers we see at the stage boundaries of [[ResNet]] models.
 
 ### Layers 3,4
-![[swin-transformer-layers-3-4.mp4]]
+
+> [!PRIVATE]
+> ![[swin-transformer-layers-3-4.mp4]]
 
 The third and fourth stage work the same as the second stage. Each stage will reduce the spatial length by 1/2 and increase the number of channels x2. This is now a hierarchial model. After the fourth stage you will have a $8 C \times \frac{H}{32} \times \frac{W}{32}$ feature map.
 
@@ -65,7 +75,9 @@ A typical transformer with a $H \times W$ grid of tokens will have an attention 
 **Problem**: computing an attention score between each pair of entries takes up too much memory.
 **Solution**: don't use full attention. Instead, use attention over patches.
 
-![[swin-transformer-window-attention.mp4]]
+> [!PRIVATE]
+> ![[swin-transformer-window-attention.mp4]]
+
 
 **Window Attention**: 
 Rather than allowing each token to attend to all other tokens, divide the tokens into windows of $M \times M$ tokens (ex. $M = 4$ in the video above) and only compute attention within each window.
@@ -76,7 +88,10 @@ The Swin Transformer uses $M = 7$ throughout the network.
 **Window Attention Problem**: Using window attention, tokens only interact with other tokens within the same window. There is no communcation across windows as you progress through different stages since communication only happens within a window.
 
 ### Shifted Window Attention
-![[swin-transformer-shifted-window.mp4]]
+
+> [!PRIVATE]
+> ![[swin-transformer-shifted-window.mp4]]
+
 The solution to the window attention problem is to use ==shifted window attention==. You alternate between normal windows (on even numbered layers) and shifted windows (on odd numbered windows). The shifted windows are shifted over by $\frac{M}{2}$. You will end up with non-square windows at the edges and corners, but you can still implement this efficiently.
 <!--SR:!2025-07-09,816,334-->
 

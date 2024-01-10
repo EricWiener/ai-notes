@@ -25,7 +25,7 @@ There are three main approaches to improving the complexity of attention:
 3. Use the low-rank property in self-attention to reduce the complexity (use linear algebra to reduce the matrix multiplies to the most significant elements).
 
 # Deformable Attention
-![[Deformable Attention#Deformable DETR Version of Deformable Attention]]
+![[Deformable Attention#Deformable DETR 's Version of Deformable Attention]]
 
 # Bounding Box Prediction
 You start with a reference point that is used as the initial guess of the box center. The reference point is predicted as a 2D normalized coordinate ($\hat{p}_q$) using a linear project + sigmoid that takes an object query as input.

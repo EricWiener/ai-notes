@@ -1,10 +1,17 @@
 ---
-tags: [flashcards, eecs498-dl4cv, eecs442]
-source:
+tags:
+  - flashcards
+  - eecs498-dl4cv
+  - eecs442
+source: 
 summary: The task of localizing objects within bounding boxes.
+publish: true
 ---
-[[lec12-object.pdf]]
-[[498_FA2019_lecture15.pdf]]
+> [!PRIVATE] Sources
+> [[lec12-object.pdf]]
+> [[498_FA2019_lecture15.pdf]]
+
+The following notes on object detection come mostly from EECS 498 Deep Learning for Computer Vision and EECS 442 Computer Vision at the University of Michigan.
 
 ![[AI-Notes/Concepts/object-detection-srcs/Screen_Shot.png|500]]
 
@@ -38,7 +45,6 @@ This was used predominantly before deep learning. It is very expensive to do thi
 
 ![[ex-background-image-sliding-window.png|200]] ![[ex-dog-image-sliding-window.png|200]]
 In the above example, we apply a sliding window to classify each region as background, dog, or cat.
-
 
 # R-CNN and Variants
 ![[rcnn-variants.png]]

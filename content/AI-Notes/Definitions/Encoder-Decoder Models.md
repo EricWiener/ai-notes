@@ -1,8 +1,12 @@
 ---
-tags: [flashcards]
-source:
-aliases: [U-Net, Encoder-Decoder]
-summary:
+tags:
+  - flashcards
+source: 
+aliases:
+  - U-Net
+  - Encoder-Decoder
+summary: 
+publish: true
 ---
 
 Encoder-decoder mode are used when you need a very high resolution output. You have an encoder that makes the image smaller. Then you have a second step that takes you back up in size.

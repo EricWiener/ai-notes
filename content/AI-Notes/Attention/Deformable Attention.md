@@ -2,21 +2,20 @@
 tags:
   - flashcards
 summary: 
-publish: true
 source: https://arxiv.org/abs/2010.04159
+publish: true
 ---
+# [[Deformable DETR]]'s Version of Deformable Attention
+It was inspired by [[Deformable Convolution]] and modifies the attention module to learn to focus on a small fixed set of sampling points predicted from the features of query elements. It is just slightly slower than traditional convolution under the same FLOPs. It is slower because you are accessing memory in a random order (vs. a conv layer which always accesses memory in the same order) so memory optimization and caching doesn't work great.
 
-# [[Deformable DETR]] Version of Deformable Attention
-Introduced in [[Deformable DETR]]. It is inspired by [[Deformable Convolution]] and modifies the attention module to learn to focus on a small fixed set of sampling points predicted from the feature of query elements. It is just slightly slower than traditional convolution under the same FLOPs. It is slower because you are accessing memory in a random order (vs. a conv layer which always accesses memory in the same order) so memory optimization and caching doesn't work great.
-
-![[annotated-deformable-attention.excalidraw|900]]
+![[Excalidraw/annotated-deformable-attention.excalidraw.png]]
 
 
 The above diagram shows a single scale feature map $x$ ($l = 1$) and 3 attention heads in green, blue, and yellow ($M = 3$). You use $K = 3$ sampling points.
 
 **Notation**:
-- $N_q$ is the number of query features ($z_q$) you have. For the encoder, this is $H \times W$. For the decoder, this is the number of objects you want to detect ($N$).
-- $K$ is the number of sampling points. It should be much less than $H \times W$.
+- $N_q$ is the number of query features ($z_q$) you have. For the encoder, this is $H \times W$ (you pass your image through a backbone that gives a downsampled feature map. You then flatten this feature map into a sequence of length $HW$. See [[Research-Papers/DETR#Transformer encoder|DETR]]). For the decoder, this is the number of objects you want to detect ($N$).
+- $K$ is the number of sampling points for each query feature to attend to the feature map. It should be much less than `grid_height` * `grid_width`.
 - $z_q \in \mathbb{R}^C$ is the feature vector of query element $q$. For the encoder, this could be one pixel of the input feature map $x$. For the decoder, this could be an object query.
 - $\hat{p}_q \in[0,1]^2$ is the normalized coordinates of the reference point for each query element $q$. These are normalized from the reference point $p_q$. For the encoder, the reference point can be the pixel of the input feature map. For the decoder, this can be predicted from its object query embedding via a linear projection + sigmoid.
 - $x^l \in \mathbb{R}^{C \times H_l \times W_l}, l=1, \ldots, L$ are the input feature maps extracted by a CNN backbone at multiple scales. In the above diagram only a single feature map is used.
@@ -40,7 +39,7 @@ $$
 \operatorname{DeformAttn}\left(\boldsymbol{z}_q, \boldsymbol{p}_q, \boldsymbol{x}\right)=\sum_{m=1}^M \boldsymbol{W}_m\left[\sum_{k=1}^K A_{m q k} \cdot \boldsymbol{W}_m^{\prime} \boldsymbol{x}\left(\boldsymbol{p}_q+\Delta \boldsymbol{p}_{m q k}\right)\right]$$
 The above is for deformable attention on a single scale feature map (multi-scale is a bit more involved).
 
-![[annotated-deformable-attn-eq.excalidraw|900]]
+![[AI-Notes/Attention/deformable-attention-srcs/annotated-deformable-attn-eq.excalidraw.png]]
 
 ### Efficiency:
 Efficiency is calculated with

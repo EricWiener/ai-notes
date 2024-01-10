@@ -1,8 +1,15 @@
 ---
-tags: [flashcards, eecs498-dl4cv]
+tags:
+  - flashcards
+  - eecs498-dl4cv
 source: https://pro.arcgis.com/en/pro-app/latest/tool-reference/image-analyst/how-compute-accuracy-for-object-detection-works.htm
-aliases: [mean average precision, mAP, average precision, COCO mAP]
+aliases:
+  - mean average precision
+  - mAP
+  - average precision
+  - COCO mAP
 summary: the average of the average precision for each class.
+publish: true
 ---
 ![[precision-recall-example-curve.png]]
 

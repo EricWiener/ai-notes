@@ -8,6 +8,9 @@ summary: Self-attention is an alternative way than RNNs/LSTMs to process sequenc
 > [!note] This page will walk through the development of the attention layer
 > Attention first started as a concept for sequence-to-sequence models. However, it was later expanded to be used with non-[[Autoregressive|autoregressive]] models. For more details on using transformers with autoregressive models, see [[Attention for Autoregressive Models]] and [[Optimized Autoregressive Transformer]].
 
+> [!NOTE]
+> If you want to process sequences with NN, you usually do this with self-attention. Need to build a new primitive block type called the [[Transformer]].
+
 # Sequence-to-Sequence with RNN
 > [!note]
 > In [[RNN, LSTM, Captioning#Sequence to Sequence seq2seq]], we combined a many-to-one and one-to-many RNN in order to generate an image caption. We didn't use a context vector there and we also didn't pass the previous output as the input to the next layer for the decoder (we were using a one-to-many architecture for the decoder). Now that we want to introduce attention, we are going to be adding in a context vector.
@@ -307,22 +310,21 @@ Sometimes you also add an additional $1 \times 1$ convolution and a residual con
 ### [[RNN, LSTM, Captioning|RNN]]: works on Ordered Sequences
 - Good at handling long sequences. The final output state can summarize the entire sequence.
 - However, you can't ==parallelize them==. The hidden states are computed sequentially. You can't use GPUs to accelerate this very well.
+- They also suffer from vanishing gradients.
 <!--SR:!2029-05-30,2068,355-->
 
 ### 1D [[Convolutional Neural Networks|CONV layer]]: works on Multidimensional Grids
 - Note these refer to a single 1 dimensional sliding [[Convolutional Neural Networks|CONV layer]] (not a [[Pointwise Convolution|1x1 Conv]]).
 - Bad at long sequences. You need to ==stack== many CONV layers in order to get a receptive field that sees the whole sequence.
-- Highly parallel: each output can be computed in parallel.
+- Highly parallel during training: each output can be computed in parallel.
 <!--SR:!2024-02-27,561,332-->
 
 ### Self-Attention: works on Sets of Vectors
 - Good at ==long sequences==: after one self-attention layer, each output will depend on each input. The **path length is reduced significantly between long-range dependencies**.
 - Highly parallel. Each output can be computed in parallel (during training).
 - Computationally faster than recurrent layers (when sequence length < representation dimensionality). For handling sequences, it is faster than regular [[Convolutional Neural Networks|CONV layer]] and self-attention + point-wise feed-forward layer has same complexity as [[Depthwise Separable Kernels]] (this is only applicable to sequences - a single CONV layer is faster than a single attention layer).
-- Yields more interable results: can visualize results.
+- Yields more interpretable results: can visualize results.
 - Con: Very memory intensive (need a key, value, and query weight matrices + input embedding, positional encoding, and 1x1 conv + the intermediate values).
 <!--SR:!2027-03-06,1406,339-->
-
-If you want to process sequences with NN, you usually do this with self-attention. Need to build a new primitive block type called the [[Transformer]].
 
 # [[Attention for Vision]]

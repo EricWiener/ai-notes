@@ -59,8 +59,8 @@ So, where do we store the actual results and materials? The typical approach is 
 
 ![[making-deep-learning-go-brrrrr-20231014173415043.png|300]]
 
-Th cost of moving stuff to and from our compute units is what's called the ==memory bandwidth== cost. 
-<!--SR:!2023-12-20,53,290-->
+The cost of moving stuff to and from our compute units is what's called the ==memory bandwidth== cost. 
+<!--SR:!2024-09-04,250,310-->
 
 > [!NOTE]
 > Every single time we perform a GPU kernel, we need to move our data from and back to our GPU's DRAM (i.e. our warehouse).

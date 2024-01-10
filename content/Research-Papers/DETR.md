@@ -17,7 +17,8 @@ publish: true
 > "This code uses learnt positional encodings in the encoder instead of fixed, and positional encodings are added to the input only instead of at each transformer layer"
 
 # Overview
-![[detr-overview.mp4]]
+> [!PRIVATE] Title
+> ![[detr-overview.mp4]]
 
 - DETR is a new method that treats object detection as a direct set prediction problem.
 - They remove hand-designed components like [[Non-maximum Suppression]], [[Faster R-CNN#Anchors|Anchors]], and regressing bounding boxes that explicitly encode our prior knowledge about the task.
@@ -33,7 +34,9 @@ publish: true
 The DETR architecture consists of three parts: a ==CNN backbone to extract features, an encoder-decoder transformer, and a feed forward network== to make the final detection prediction.
 <!--SR:!2024-08-07,461,312-->
 
-![[detr-architecture.mp4]]
+> [!PRIVATE]
+> ![[detr-architecture.mp4]]
+
 ![[detr-architecture-diagram.png|800]]
 
 ![[DN-DETR#DETR Architecture]]
@@ -78,7 +81,7 @@ The decoder then computes multi-head attention:
 - Values come from `memory`
 
 The below diagram shows the cross-attention within DETR's transformer decoder:
-![[detr-cross-attention-layer-annotated]]
+![[Excalidraw/detr-cross-attention-layer-annotated.png]]
 
 ### Prediction feed-forward network (FFN)
 - The output embeddings are decoded independently by the FFN resulting in $N$ final predictions. Note that $N$ is a hyperparameter decided before-hand and is the number of output 

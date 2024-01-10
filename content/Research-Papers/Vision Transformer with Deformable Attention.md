@@ -8,9 +8,8 @@ summary: present Deformable Attention Transformer, a general backbone model with
 This paper improves the [[Deformable Attention]] introduced in [[Deformable DETR]] and makes it better suited to use throughout the entire transformer.
 
 # What's the difference between DAT and [[Deformable DETR]]?
-
 **DAT is used in the vision backbone while D-DETR is used in the detection head**
-DAT's deformable attention serves as a feature extractor in the vision backbones while the one in Deformable DETR which replaces the vanilla attention in DETR with a linear deformable attention, plays the role of the detection head.
+DAT's deformable attention serves as a feature extractor in the vision backbones while the one in Deformable DETR replaces the vanilla attention in DETR with a linear deformable attention and plays the role of the detection head.
 
 **D-DETR is closer to convolution than attention**
 

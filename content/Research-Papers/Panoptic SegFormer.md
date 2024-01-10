@@ -1,8 +1,11 @@
 ---
-tags: [flashcards]
-aliases: [Delving Deeper into Panoptic Segmentation with Transformers]
+tags:
+  - flashcards
+aliases:
+  - Delving Deeper into Panoptic Segmentation with Transformers
 source: https://arxiv.org/abs/2109.03814
 summary: a general framework for panoptic segmentation with transformers.
+publish: true
 ---
 
 > [!NOTE] Main concepts introduced in framework:
@@ -90,7 +93,7 @@ Finally, the fused attention maps $A_{\text{fused}}$ are passed to a $1 \times 1
 
 **Training**:
 During training you predict a mask and a category at each layer of the decoder. This is referred to as ==deep supervision== and using it results in the mask decoder performing better and convering faster.
-<!--SR:!2023-12-23,83,270-->
+<!--SR:!2024-11-29,336,290-->
 
 **Inference**:
 During inference only the mask and category predictions from the last layer of the 
@@ -98,7 +101,9 @@ decoder are used.
 
 # Mask Merging
 Most papers will produce an output of $(C, H, W)$ where $C$ is a 0-1 distribution over the classes that can be assigned to. The papers then take a pixel-wise argmax to decide on the label for a particular pixel. The paper observed that **this consistently produces false-positive results due to abnormal pixel values.** Instead, they use a ==mask-wise merging strategy== by resolving conflicts between predicted masks. They give precedence to masks with the highest confidence scores. The pseudo-code is shown below:
-![[panoptic-segformer-mask-merging-algo.excalidraw|800]]
+
+![[Excalidraw/panoptic-segformer-mask-merging-algo.excalidraw.png]]
+
 The mask-wise merging strategy takes $c$, $s$, and $m$ as input, denoting the predicted categories, confidence scores, and segmentation masks, respectively. It outputs a semantic mask `SemMsk` and an instance id mask `IdMsk`, to assign a category label and an instance id to each pixel. Specifically:
 - `SemMsk` and `IdMsk` are first initialized by zeros.
 - Sort prediction results in descending order of confidence score and fill the sorted predicted masks into `SemMsk` and `IdMsk` in order.
