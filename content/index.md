@@ -2,7 +2,7 @@
 title: Eric's AI Notes
 publish: true
 ---
-Below is a list of some of my machine learning notes. I have only started sharing my notes publicly recently in the hope that they may useful to others. I will continue to add notes to this page as I read new papers.
+Below is a list of some of my machine learning notes. I have only started sharing my notes publicly recently in the hope that they may be useful to others. I will continue to add notes to this page as I read new papers.
 
 ### Language Models
 [[Research-Papers/Multi-Agent Motion Forecasting as Language Modeling|Multi-Agent Motion Forecasting as Language Modeling]]
