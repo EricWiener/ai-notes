@@ -5,10 +5,10 @@ summary:
 source: https://arxiv.org/abs/2010.04159
 publish: true
 ---
-# [[Deformable DETR]]'s Version of Deformable Attention
-It was inspired by [[Deformable Convolution]] and modifies the attention module to learn to focus on a small fixed set of sampling points predicted from the features of query elements. It is just slightly slower than traditional convolution under the same FLOPs. It is slower because you are accessing memory in a random order (vs. a conv layer which always accesses memory in the same order) so memory optimization and caching doesn't work great.
+# Deformable DETR Version of Deformable Attention
+[[Research-Papers/Deformable DETR|Deformable DETR]] was inspired by [[Deformable Convolution]] and modifies the attention module to learn to focus on a small fixed set of sampling points predicted from the features of query elements. It is just slightly slower than traditional convolution under the same FLOPs. It is slower because you are accessing memory in a random order (vs. a conv layer which always accesses memory in the same order) so memory optimization and caching doesn't work great.
 
-![[Excalidraw/annotated-deformable-attention.excalidraw.png]]
+![[AI-Notes/Attention/deformable-attention-srcs/annotated-deformable-attention.excalidraw.png]]
 
 
 The above diagram shows a single scale feature map $x$ ($l = 1$) and 3 attention heads in green, blue, and yellow ($M = 3$). You use $K = 3$ sampling points.
@@ -48,7 +48,7 @@ Which simplifies to:
 - $O\left(H W C^2\right)$ in the DETR encoder ($N_q = HW$)
 - $O(NKC^2)$ in the DETR decoder ($N_q = N$)
 
-# [[Vision Transformer with Deformable Attention|DAT]] Version
-The paper Vision Transformer with Deformable Attention introduces an alternative form of deformable attention that is simpler than [[Deformable DETR]]'s implementation.
+# DAT Version
+The paper [[Research-Papers/Vision Transformer with Deformable Attention|Vision Transformer with Deformable Attention]] introduces an alternative form of deformable attention that is simpler than [[Deformable DETR]]'s implementation.
 ![[deformable-attention-20230105115617649.png]]
 Figure 1: Comparison of DAT with other Vision Transformer models and DCN ([[Deformable Convolution]]) in CNN model. The red star and the blue star denote the different queries, and masks with solid line boundaries denote the regions to which the queries attend. In a data-agnostic way: (a) [[ViT An Image is Worth 16x16 Words Transformers for Image Recognition at Scale|ViT]] adopts full attention for all queries. (b) [[Swin Transformer]] uses partitioned window attention. In a data-dependent way: (c) [[Deformable Convolution]] learns different deformed points for each query. (d) [[Vision Transformer with Deformable Attention|DAT]] learns shared deformed points for all queries.

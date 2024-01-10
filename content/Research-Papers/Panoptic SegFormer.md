@@ -12,7 +12,6 @@ publish: true
 > 1. A deeply-supervised mask decoder.
 > 2. A query decoupling strategy.
 > 3. Improved post-processing method.
-
 - Uses [[Deformable DETR]] to process multi-scale features.
 
 # Framework
@@ -38,7 +37,7 @@ Some literature argue that the reason [[DETR|DETR]] is slow to converge is becau
 Panoptic SegFormer consists of three key modules: transformer encoder, location decoder, and mask decoder.
 
 ### Backbone
-![[panoptic-segformer-annotated-backbone|900]]
+![[Research-Papers/panoptic-segformer-srcs/panoptic-segformer-annotated-backbone.png]]
 - You pass an input image $X \in \mathbb{R}^{H \times W \times 3}$ to the backbone network and get feature maps $C_3, C_4, C_5$ from the last three stages. These have resolutions $1/8, 1/16, 1/32$ with respect to the original image.
 - You then project each of the feature maps from however many channels they have (denoted with `?`) to 256 channels using a 1x1 conv (the paper calls this a fully-connected layer).
 - You then flatten each of the feature maps and concatenate them to produce your input sequence to the encoder. 
@@ -63,6 +62,7 @@ During training an auxiliary MLP head is added on top of the location-aware quer
 
 ### Mask Decoder
 ![[annotated-mask-decoder.png|400]]
+
 The mask decoder is for final classification and segmentation. It takes the $N_{\text{thing}}$ tokens with location information from the location decoder and the $N_{\text{stuff}}$ randomly initialized queries. The $N_{\text{stuff}}$ queries don't pass through the location decoder since there is no concept of an instance for "stuff."
 
 ![[screenshot-2023-01-04_14-04-59.png]]
@@ -77,7 +77,7 @@ The paper uses a very lightweight FC head (only 200 parameters) to make the clas
 <!--SR:!2024-03-29,292,274-->
 
 **Binary mask prediction**:
-> [!TODO] what are the shapes of the attention maps?
+> [!PRIVATE] what are the shapes of the attention maps?
 
 "Intuitively, the ground truth mask is exactly the meaningful region on which we expect the attention module to focus." Therefore, the paper uses the ==attention maps== as the input to a $1 \times 1$ conv that predicts the binary mask.
 <!--SR:!2025-06-05,612,277-->
@@ -92,7 +92,7 @@ where $\mathrm{Up}_{\times 2}(\cdot)$ and $\mathrm{Up}_{\times 4}(\cdot)$ mean t
 Finally, the fused attention maps $A_{\text{fused}}$ are passed to a $1 \times 1$ conv for binary mask prediction.
 
 **Training**:
-During training you predict a mask and a category at each layer of the decoder. This is referred to as ==deep supervision== and using it results in the mask decoder performing better and convering faster.
+During training you predict a mask and a category at each layer of the decoder. This is referred to as ==deep supervision== and using it results in the mask decoder performing better and converging faster.
 <!--SR:!2024-11-29,336,290-->
 
 **Inference**:
@@ -102,7 +102,7 @@ decoder are used.
 # Mask Merging
 Most papers will produce an output of $(C, H, W)$ where $C$ is a 0-1 distribution over the classes that can be assigned to. The papers then take a pixel-wise argmax to decide on the label for a particular pixel. The paper observed that **this consistently produces false-positive results due to abnormal pixel values.** Instead, they use a ==mask-wise merging strategy== by resolving conflicts between predicted masks. They give precedence to masks with the highest confidence scores. The pseudo-code is shown below:
 
-![[Excalidraw/panoptic-segformer-mask-merging-algo.excalidraw.png]]
+![[Research-Papers/panoptic-segformer-srcs/panoptic-segformer-mask-merging-algo.excalidraw.png]]
 
 The mask-wise merging strategy takes $c$, $s$, and $m$ as input, denoting the predicted categories, confidence scores, and segmentation masks, respectively. It outputs a semantic mask `SemMsk` and an instance id mask `IdMsk`, to assign a category label and an instance id to each pixel. Specifically:
 - `SemMsk` and `IdMsk` are first initialized by zeros.

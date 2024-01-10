@@ -29,6 +29,7 @@ Adaptions 1) and 2) make it easier for the model to scale up capacity (training 
 
 ### Residual post norm:
 ![[layernorm-20220904092429354.png|400]]
+
 The original [[Attention is All You Need]] paper used post-norm:
 ```
 x = norm(attn(x) + x)
@@ -66,7 +67,7 @@ where $B_{i j}$ is the relative position bias between pixel $i$ and $j$, $\tau$ 
 - The scaling up of vision models has lagged behind. Larger vision models usually perform better, but there size has been limited and the largest models are usually just used for image classification. The paper claims this is "due to inductive biases in the CNN architecture limiting modeling power."
 
 # Instability in training
-- The discrepenacy of activation amplitudes across layers becomes significantly greater in larger models.
+- The discrepancy of activation amplitudes across layers becomes significantly greater in larger models.
 - This is caused by the output of the residual unit being directly added back to the main branch. The result is that the activation values are accumulated layer by layer, and the amplitudes at deeper layers are thus significantly larger than those at early layers.
 - To address this, they propose a new normalization configuration called ==res-post-norm== which moves the LN layer from the beginning of each residual unit to the back-end. This new activation produces much milder activation values across the network layers.
 - They also propose a ==scaled cosine attention== to replace the previous dot product attention. This makes the computation irrelevant to amplitudes of block inputs, and the attention values are less likely to fall into extremes. 
@@ -97,10 +98,8 @@ The meta network $\mathcal{G}$ generates bias values for arbitrary relative coor
 **Log-spaced coordinates**
 Swin V2 calculates the relative coordinates using log-spaced vs. linear-spaced coordinates:
 
-$$\begin{aligned}
-&\widehat{\Delta x}=\operatorname{sign}(x) \cdot \log (1+|\Delta x|) \\
-&\widehat{\Delta y}=\operatorname{sign}(y) \cdot \log (1+|\Delta y|)
-\end{aligned}$$
+$$\begin{aligned}&\widehat{\Delta x}=\operatorname{sign}(x) \cdot \log (1+|\Delta x|) \\ &\widehat{\Delta y}=\operatorname{sign}(y) \cdot \log (1+|\Delta y|)\end{aligned}$$
+
 Note: you use the magnitude of the coordinate difference inside the log since the log of a negative number is ==undefined==. You then multiply by the sign of the difference to preserve positive/negative information.
 <!--SR:!2024-01-26,368,312-->
 
@@ -109,7 +108,7 @@ Note: you use the magnitude of the coordinate difference inside the log since th
 - The log-spaced CPB approach performs best, particularly when transfered to larger window sizes. 
 <!--SR:!2025-03-05,494,272-->
 
-> [!info]- With the log-spaced coordinates, transferring from a pre-trained 8x8 window size to a 16x16 window size, the extrapolation window will be 0.33x the original ratio
+> [!INFO]- With the log-spaced coordinates, transferring from a pre-trained 8x8 window size to a 16x16 window size, the extrapolation window will be 0.33x the original ratio
 > 
 > Using the original window size, the input coordinate range will be from $[-7,7] \times[-7,7]$ to $[-15,15] \times[-15,15]$. The extrapolation ratio is $\frac{8}{7}=1.14 \times$ of the original range.
 > 

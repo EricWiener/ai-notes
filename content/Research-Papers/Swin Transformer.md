@@ -24,7 +24,7 @@ Traditional vision transformers produce feature maps of a single low resolution 
 - Typical transformers are not suitable for things like semantic segmentation because this would require labels on the pixel-level scale which would be quadratic complexity with respect to the image dimensions. 
 - They also don't work well for object detection since objects can occur at multiple scales and traditional transformers only produce features at a single scale.
 
-**Swin uses a hierarchial architecture unlike traditional ViT**
+**Swin uses a hierarchical architecture unlike traditional ViT**
 ![[swin-hierarchial-architecture.png|400]]
 - CNNs process an image in multiple stages. In each stage, the image resolution will be decreased and the number of channels will be increased. This is done with the ==patch merging== layer which groups Cx2x2 patches together, concatenates them to be 4Cx1x1, and then linearly projects them to be 2Cx1x1.
 - This is useful since objects in images can occur at various scales. Earlier layers will see higher resolution (and smaller) areas. Later layers will see lower resolution (and larger) areas. This is referred to as multi-scale features.
@@ -40,12 +40,12 @@ Traditional vision transformers produce feature maps of a single low resolution 
 > ![[swin-transformer-layer-1.mp4]]
 
 ![[swin-transformer-start.png|400]]
+
 Like a [[ViT An Image is Worth 16x16 Words Transformers for Image Recognition at Scale|ViT]], the Swin Transformer will start by:
 - Take input image of dimension $3 \times H \times W$
 - Split the image up into patches. However, ViT usually splits the image up into 16x16 pixel regions while a Swin Transformer will split the image up into 4x4 pixel regions. The spatial size of the feature map after the patch embedding will be $3 \times \frac{H}{4} \times \frac{W}{4}$ since the image is broken up into 4x4 patches.
 - Linearly project each patch to C dimensions using a 1x1 conv (now the feature map is $C \times \frac{H}{4} \times \frac{W}{4}$) 
 - Have transformer blocks operate on the patches.
-
 
 ### Second layer of the Swin Transformer
 
@@ -54,8 +54,10 @@ Like a [[ViT An Image is Worth 16x16 Words Transformers for Image Recognition at
 
 The second stage of the Swin Transformer is similar to the first, but introduces a patch merging layer that decreases the spatial resolution by 1/2 in both length and width and double the number of channels.
 
-**Patch Merging Layer**: 
+**Patch Merging Layer**:
+
 ![[swin-transformer-diagram.png|500]]
+
 - This will reduce the spatial resolution by merging adjacent patches and increasing the channel dimension.
 - You group together a 2x2 section of patches ($C \times 2 \times 2$), concatenate the groups to be $4C \times 1 \times 1$. The features now have a lower resolution (half the spatial resolution in both height and width), but quadruple the number of channels.
 - You then linearly project the $4C$ channels to $2C$ channels with a 1x1 conv.
@@ -100,7 +102,9 @@ An issue with shifted window partitioning is that it results in more windows and
 
 Swin uses a more efficient batch computation approach by ==cyclic-shifting toward the top-left== as shown below. Here, the shifted windows are re-arranged so that a batched window may be composed of several sub-windows that are not adjacent in the feature map. Masking is used to limit self-attention to within each sub-window.
 ![[shifted-window-cyclic-attention-w-windows-marked.png|500]]
+
 Note that is the windows weren't cyclic shifted and you just computed masked attention using $M \times M$ windows without shifting you would end up with none of the $M \times M$ windows actually containing an actual window (shown on the left in the diagram below). With the shifted computation, one of the original $M \times M$ windows is preserved and requires no masking.
+
 ![[swin-transformer-no-cyclic-shifting.png|400]]
 <!--SR:!2025-09-07,862,330-->
 
