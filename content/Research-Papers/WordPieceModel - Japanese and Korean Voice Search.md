@@ -1,8 +1,10 @@
 ---
-tags: [flashcards]
-source: [[WordPieceModel - Japanese and Korean Voice Search.pdf]]
-aliases: [WordPieceModel]
+tags:
+  - flashcards
+aliases:
+  - WordPieceModel
 summary: an iterative algorithm for creating an embedding for a vocabulary
+source: https://ieeexplore.ieee.org/document/6289079
 ---
 
 [[WordPieceModel - Japanese and Korean Voice Search.pdf]]

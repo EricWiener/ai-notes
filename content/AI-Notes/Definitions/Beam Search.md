@@ -1,8 +1,13 @@
 ---
-tags: [flashcards]
+tags:
+  - flashcards
 source: https://www.baeldung.com/cs/beam-search
 summary: an greedy version of breadth first search that only expands a fixed number of paths
+publish: true
 ---
+
+> [!NOTE]
+> The following are my notes from [this](https://www.baeldung.com/cs/beam-search) article by [Akbar Karimi](https://www.baeldung.com/cs/author/akbarkarimi "Posts by Akbar Karimi")
 
 Beam Search is often used in [[Autoregressive|autoregressive]] tasks such as machine translation where you first encode a sequence of words from the source language and then decode the intermediate representation into a sequence of words in the target language. In the decoding process, for each word in the sequence, **there can be several options**. This is where the beam search comes into play. At each time step you will only keep a ==fixed number of the best== output sequences.
 <!--SR:!2028-09-08,1852,350-->

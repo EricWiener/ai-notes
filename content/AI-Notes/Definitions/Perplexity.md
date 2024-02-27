@@ -1,13 +1,13 @@
 ---
-tags: [flashcards]
+tags:
+  - flashcards
 source: https://en.wikipedia.org/wiki/Perplexity
 summary: In NLP, perplexity is a way of evaluating language models. Models with a lower perplexity are better and will be more confident about their predictions.
+publish: true
 ---
-In natural language processing, **perplexity** is a way of evaluating language models. Models with a lower perplexity are ==better== and will be ==more confident== about their predictions.
+In natural language processing, **perplexity** is a way of evaluating language models. Models with a lower perplexity for test examples (drawn from the same distribution as the training examples) are ==better== and will be ==more confident== about their predictions. Perplexity tells you how confident the model was about the sequence is predicted.
 <!--SR:!2028-09-12,1856,350!2024-02-24,558,330-->
 
-A language model is a probability distribution over entire sentences or texts.
-
-A model of an unknown probability distribution _p_, may be proposed based on a training sample that was drawn from _p_. Given a proposed probability model _q_, one may evaluate _q_ by asking how well it predicts a separate test sample $x_1, x_2, \dots, x_N$ also drawn from _p_.
-
-Better models _q_ of the unknown distribution _p_ will tend to assign higher probabilities _q_(_xi_) to the test events. Thus, they have lower perplexity: they are less surprised by the test sample.
+Perplexity is defined as:
+$$\mathcal{P}=\exp \left(-\frac{1}{n} \sum_{i=1}^n \log f_\theta\left(x_i \mid x_1, \ldots, x_{i-1}\right)\right)$$
+If the perplexity is low, then the model is not very “surprised” by the sequence and has assigned on average a high probability to each subsequent token in the sequence.

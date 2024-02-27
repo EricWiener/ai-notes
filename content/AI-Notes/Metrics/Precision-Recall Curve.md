@@ -13,6 +13,8 @@ To remember this, you can use: each is the true positive (TP) as the numerator d
 -   **P**recision: TP / **P**redicted positive
 -   **R**ecall: TP / **R**eal positive
 
+predicted and correct non-moving / correct non-moving
+
 # Precision-Recall Curve
 ![[pr-curve-example.png|300]]
 

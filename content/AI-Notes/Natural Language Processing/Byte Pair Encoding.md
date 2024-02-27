@@ -3,7 +3,9 @@ tags:
   - flashcards
 source: https://youtu.be/tOMjTCO0htA
 summary: A corpus based tokenizer that can compress a dataset into learned tokens
+publish: true
 ---
+ A byte pair encoder works by iteratively merging the most frequent pair of bytes in the input text to create a new token or subword unit. This process helps in reducing the vocabulary size and capturing the underlying patterns and structures in the text data, which is crucial for training and improving the performance of LLMs.
 ### Training Algorithm
 Let vocabulary be the set of all individual characters = {A, B, C, D,..., a, b, c, d....}.
 
